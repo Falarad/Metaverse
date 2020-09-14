@@ -1,0 +1,34 @@
+body {
+    padding: 50px;
+    font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: block;
+}
+.organizer {
+    display: block;
+    text-align: center;
+    width: 60%;
+}
+.top-in {
+    position: relative;
+    animation-name: shiftUp;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+}
+.bottom-in {
+    position: relative;
+    animation-name: shiftDown;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
+}
+@keyframes shiftUp {
+    0% {top:-543px;}
+    100% {top: 0px}
+}
+@keyframes shiftDown {
+    0% {top:930px;}
+    100% {top: 0px}
+}
+a {
+    color: #00B7FF;
+    text-decoration: none;
+}
