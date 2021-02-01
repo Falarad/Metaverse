@@ -17,4 +17,23 @@ mixin Elysee(list, regex)
                 ul
                   for variables, descriptor in values
                     li #{descriptor.replace(regex, '$1$4$6 $2$3$5$7')} - #{variables}
+mixin ElyseeDouble(list, regex)
+  ul
+    for val, index in list
+      //sets class to index, which is set by the above for loop
+      div(class=index)
+        li #{index.replace(regex, '$1$4$6 $2$3$5$7')}
+        //some logic to process the only outlier in the JSON
+        if index == "firstTable"
+          ul
+            for variables, descriptor in val
+              li #{descriptor.replace(regex, '$1$4$6 $2$3$5$7')} - #{variables}
+        else
+          ul
+            for values, group in val
+              div(class=group)
+                li #{group.replace(regex, '$1$4$6 $2$3$5$7')}
+                ul
+                  for variables, descriptor in values
+                    li #{descriptor.replace(regex, '$1$4$6 $2$3$5$7')} - #{variables}
 mixin pbta(list, regex)
