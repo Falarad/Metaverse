@@ -12,7 +12,9 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "mongodb": "^3.5.9",
+    "mongoose": "^5.10.5",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "strapi": "^3.4.2"
   }
 }

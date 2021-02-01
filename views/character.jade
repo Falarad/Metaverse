@@ -1,0 +1,12 @@
+extends layout
+include .\templates
+
+block content
+    div(class="organizer jumbotron mx-auto")
+        h1(class="display-1")= title
+        .character
+          +#{template}(list, regex)
+            
+          
+          
+        

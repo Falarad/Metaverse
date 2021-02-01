@@ -3,15 +3,18 @@ body {
     font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
     display: block;
 }
+.display-1 {
+    text-transform: capitalize;
+}
 .organizer {
     display: block;
-    text-align: center;
+    text-align: left;
     width: 60%;
 }
 .top-in {
     position: relative;
     animation-name: shiftUp;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-timing-function: ease-out;
 }
 .bottom-in {
