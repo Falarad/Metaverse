@@ -1,0 +1,7 @@
+extends layout
+include .\templates
+
+block content
+  for val in list
+    .bg-light.jumbotron.mx-auto.organizer
+      +#{val.postTemplate}(val.body)

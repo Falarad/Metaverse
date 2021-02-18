@@ -37,3 +37,7 @@ mixin ElyseeDouble(list, regex)
                   for variables, descriptor in values
                     li #{descriptor.replace(regex, '$1$4$6 $2$3$5$7')} - #{variables}
 mixin pbta(list, regex)
+  p How'd you get here?
+mixin Blog(list)
+  for val, i in list
+    p #{i} | #{val}
