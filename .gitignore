@@ -1,3 +1,4 @@
 node_modules/
 public/javascripts/db.js
 .env
+routes/multiuser.js

@@ -4,16 +4,16 @@ block content
     div(class="organizer top-in jumbotron mx-auto")
         h1(class="display-1")= title
         p Welcome to #{title}! Please login below.
-        form(method="POST", action="/feed")
+        form(method="POST", action="/login")
             div(class="form-group")
-                input(type='text', name="Username", placeholder="Username")
+                input(type='text', name="email", placeholder="Email")
             div(class="form-group")
-                input(type='password', name="Password", placeholder="Password")
+                input(type='password', name="password", placeholder="Password")
             div(class="form-group")
                 input(type='submit')
+                br
+                p #{flash}
             div(class="form-group")
                 a(href="/signup") Sign up
                 br
                 a(href='/discover') Browse as a Guest
-                br
-                a(href='/admin')
