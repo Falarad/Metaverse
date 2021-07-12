@@ -1,5 +1,5 @@
-var mongoose = require('Mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 //mongoose.connect('mongodb://127.0.0.1:27017/Metaverse', {useNewUrlParser: true, useUnifiedTopology: true, keepAliveInitialDelay: 300000});
 mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true, keepAliveInitialDelay: 300000});
 var db = mongoose.connection;
@@ -28,6 +28,7 @@ const postSchema = new mongoose.Schema({
 });
 const userSchema = new mongoose.Schema({
     email: String,
+    password: String,
     displayname: String,
     username: String,
     follows: Object,
@@ -36,7 +37,12 @@ const userSchema = new mongoose.Schema({
     lastUpdate: Date,
     dateOfCreation: Date
 });
-userSchema.plugin(passportLocalMongoose);
+userSchema.methods.generateHash = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(24), null);
+};
+userSchema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password);
+};
 var models = {};
 models.Char = mongoose.model('characters', characterSchema);
 models.World = mongoose.model('worlds', worldSchema);

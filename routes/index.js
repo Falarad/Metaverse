@@ -3,7 +3,7 @@ var router = express.Router();
 
 var passport = require('passport');
 var models = require('../routes/db.js');
-var multiuser = require('../routes/multiuser.js');
+var passportConfig = require('../routes/multiuser.js')
 
 var format = "";
 var list = {};
@@ -25,24 +25,26 @@ router.get('/feed', async function(req, res, next) {
   res.render('index', { title: 'Feed'});
 })
 router.get('/signup', async function(req, res, next) {
-  res.render('index', { title: 'Metaverse'});
+  res.render('signup');
 })
+router.post('/signup', passport.authenticate('local-signup', {successRedirect: '/management', failureRedirect: '/', failureFlash: true }));
 router.get('/worlds', async function(req, res, next) {
   res.render('index', { title: 'Metaverse'});
 })
 router.get('/management', async function(req, res, next) {
   res.render('index', { title: 'Metaverse' , list: db('home') });
 })
-router.post('/login', passport.authenticate('local', { failureRedirect: '/', failureFlash: true }), function(req, res){
-  res.redirect(301, '/' + req.user.username + '/management');
-})
-router.get('/:user/management', async function(req, res, next) {
-  if(req.session.passport.user == req.params.user){
+router.post('/login', passport.authenticate('local-login', {successRedirect: '/management', failureRedirect: '/', failureFlash: true }));
+router.get('/management', isLoggedIn, async function(req, res, next) {
     res.render('management', { title: 'Admin Panel', user: req.user });
-  } else {
-    res.redirect(301, '/');
-  }
 })
-router.post('/:user/:post', async function(req, res, next) {
+router.get('/logout', isLoggedIn, async function(req, res, next) {
+  req.logout();
+  res.redirect(301, '/');
 })
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated())
+    return next();
+  res.redirect('/');
+}
 module.exports = router;
